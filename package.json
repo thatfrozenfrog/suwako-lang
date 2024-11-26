@@ -1,0 +1,37 @@
+{
+  "name": "suwako-lang",
+  "displayName": "Suwako",
+  "description": "Syntax highlighting for swk lang",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "swk",
+        "aliases": [
+          "Swk",
+          "swk"
+        ],
+        "extensions": [
+          ".swk"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "swk",
+        "scopeName": "source.swk",
+        "path": "./syntaxes/swk.tmLanguage.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "scopeName": "source.swk",
+  "fileTypes": [".swk"],
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SWK",
+  "patterns": [
+    { "include": "#line-python" },
+    { "include": "#line-comment" },
+    { "include": "#block-comment" },
+    { "include": "#define" },
+    { "include": "#label" },
+    { "include": "#adrlabel" },
+    { "include": "#keywords" },
+    
+    { "include": "#pop-keyword" },
+    { "include": "#parentheses" },
+    { "include": "#string" },
+    { "include": "#arithmetic-operators" }
+  ],
+  "repository": {
+    "line-python": {
+      "begin": "^\\$",
+      "end": "(?=$|[^\\n])",
+      "patterns": [
+        { "include": "source.python" }
+      ]
+    },
+    "line-comment": {
+      "match": ";.*$",
+      "name": "comment.line.semicolon"
+    },
+    "block-comment": {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "name": "comment.block"
+    },
+    "define": {
+      "match": "\\bdef\\s[a-zA-Z_][a-zA-Z0-9_]*",
+      "name": "entity.name.function"
+    },
+    "label": {
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*:\\s*",
+      "name": "entity.name.function"
+    },
+    "adrlabel": {
+      "match": "(?<=adr\\s)[a-zA-Z_][a-zA-Z0-9_]*",
+      "name": "entity.name.function.adr"
+    },
+    "keywords": {
+      "match": "\\b(adr|str|org|hex|macro|space|goto|call|pr_length)\\b",
+      "name": "keyword.control"
+    },
+    "pop-keyword": {
+      "match": "\\bpop\\s(er|xr|qr|r)\\d{1,2}\\b",
+      "name": "variable.name.pop"
+    },
+    "parentheses": {
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "match": "\\badr\\b",
+          "name": "keyword.control.adr"
+        },
+        {
+          "match": "(?<=adr\\s)[a-zA-Z_][a-zA-Z0-9_]*",
+          "name": "entity.name.function.adr"
+        },
+        {
+          "match": "\\b[0-9A-Fa-f]{4}\\b",
+          "name": "constant.numeric.hex"
+        },
+        {
+          "match": "\\b[0-9A-Fa-f]{2}\\b",
+          "name": "constant.numeric.hex"
+        }
+      ]
+    },
+    "string": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "variable.name"
+    },
+    "arithmetic-operators": {
+      "match": "\\+|\\-",
+      "name": "keyword.operator"
+    }
+  }
+}

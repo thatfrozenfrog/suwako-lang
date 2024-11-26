@@ -1,0 +1,64 @@
+name: SWK Language
+scopeName: source.swk
+fileTypes:
+  - .swk
+patterns:
+  # Python highlighting for lines starting with $
+  - name: source.python.embedded.swk
+    begin: '^(\\$)'
+    beginCaptures:
+      1:
+        name: punctuation.definition.python.swk
+    end: '(?=$|[^\\n])'
+    patterns:
+      - include: 'source.python'
+
+  # Highlight labels (keywords ending with :)
+  - name: entity.name.label.swk
+    match: '\\b[a-zA-Z_][a-zA-Z0-9_]*:\\b'
+
+  # Highlight keywords
+  - name: keyword.control.swk
+    match: '\\b(str|def|org|hex|macro|space|goto|call|pr_length)\\b'
+
+  # Highlight 'pop' with specific suffixes
+  - name: keyword.control.pop.swk
+    match: '\\bpop(er|xr|qr|r[02468])\\b'
+
+  # Highlight content inside parentheses
+  - begin: '\\('
+    beginCaptures:
+      0:
+        name: punctuation.section.group.begin.swk
+    end: '\\)'
+    endCaptures:
+      0:
+        name: punctuation.section.group.end.swk
+    patterns:
+      - name: keyword.control.adr.swk
+        match: '\\badr\\b'
+      - name: constant.numeric.hex4.swk
+        match: '\\b[0-9A-Fa-f]{4}\\b'
+      - name: constant.numeric.hex2.swk
+        match: '\\b[0-9A-Fa-f]{2}\\b'
+
+  # Highlight comments
+  - name: comment.line.semicolon.swk
+    match: ';.*$'
+  - name: comment.block.swk
+    begin: '/\\*'
+    end: '\\*/'
+
+  # Highlight arithmetic operators
+  - name: keyword.operator.arithmetic.swk
+    match: '\\+|\\-'
+
+repository:
+  brackets:
+    patterns:
+      - name: punctuation.section.brackets.round.swk
+        match: '\\(|\\)'
+      - name: punctuation.section.brackets.curly.swk
+        match: '\\{|\\}'
+      - name: punctuation.section.brackets.square.swk
+        match: '\\[|\\]'

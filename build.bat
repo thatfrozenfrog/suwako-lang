@@ -1,0 +1,1 @@
+npx js-yaml syntaxes/swk.tmLanguage.yaml > syntaxes/swk.tmLanguage.json
