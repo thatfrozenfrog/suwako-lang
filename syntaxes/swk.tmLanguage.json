@@ -125,7 +125,7 @@
     },
 
     "symbols": {
-      "match": "\\b(flush|pr_length|render.{4}4|sp|rt|(mem|str)cpy|pr_length|mov|smart_\\w*|str(cat|len)|get\\w*|\\w*_draw|.*print|print\\w*|wait.*\\s|num_\\w*|setlr|DI|(BL|bl)\\s\\w*|)\\b",
+      "match": "\\b(flush|pr_length|render.{4}4|sp|(RT|rt)|(mem|str)cpy|pr_length|mov|smart_\\w*|str(cat|len)|get\\w*|\\w*_draw|.*print|print\\w*|wait.*\\s|num_\\w*|setlr|DI|(BL|bl)\\s\\w*|st)\\b",
       "name": "keyword.other"
     }
   }
