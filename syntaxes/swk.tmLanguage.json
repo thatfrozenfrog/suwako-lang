@@ -5,17 +5,22 @@
   "name": "SWK",
   "patterns": [
     { "include": "#line-python" },
+
     { "include": "#line-comment" },
     { "include": "#block-comment" },
     { "include": "#define" },
+    { "include": "#definehex" },
     { "include": "#label" },
     { "include": "#adrlabel" },
     { "include": "#keywords" },
-    
     { "include": "#pop-keyword" },
+    { "include": "#variable" },
     { "include": "#parentheses" },
     { "include": "#string" },
-    { "include": "#arithmetic-operators" }
+    { "include": "#macro" },
+    { "include": "#macrokey" },
+    { "include": "#arithmetic-operators" },
+    { "include": "#symbols" }
   ],
   "repository": {
     "line-python": {
@@ -35,11 +40,17 @@
       "name": "comment.block"
     },
     "define": {
-      "match": "\\bdef\\s[a-zA-Z_][a-zA-Z0-9_]*",
-      "name": "entity.name.function"
+      "match": "\\bdef\\s",
+      "name": "keyword.control"
     },
+
+    "definehex": {
+      "match": "(?<=def\\s)(\\d|\\w)*",
+      "name": "constant.numeric"
+    },
+
     "label": {
-      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*:\\s*",
+      "match": "[a-zA-Z_][a-zA-Z0-9_]*(?=:)",
       "name": "entity.name.function"
     },
     "adrlabel": {
@@ -47,12 +58,12 @@
       "name": "entity.name.function.adr"
     },
     "keywords": {
-      "match": "\\b(adr|str|org|hex|macro|space|goto|call|pr_length)\\b",
+      "match": "\\b(adr|str|org|hex|space|goto|call|pr_length)\\b",
       "name": "keyword.control"
     },
     "pop-keyword": {
-      "match": "\\bpop\\s(er|xr|qr|r)\\d{1,2}\\b",
-      "name": "variable.name.pop"
+      "match": "\\bpop\\s\\b",
+      "name": "variable.name"
     },
     "parentheses": {
       "begin": "\\(",
@@ -76,14 +87,32 @@
         }
       ]
     },
+
+    "macro": {
+      "match": "\\bmacro\\s",
+      "name": "keyword.control"
+    },
+    "macrokey": {
+      "match": "(?<=macro\\s)[a-zA-Z_][a-zA-Z0-9_]*",
+      "name": "constant.character"
+    },
     "string": {
       "begin": "\"",
       "end": "\"",
-      "name": "variable.name"
+      "name": "string.quoted.double"
     },
     "arithmetic-operators": {
-      "match": "\\+|\\-",
-      "name": "keyword.operator"
+      "match": "(\\+|-|\\/ a|\\*|=|<|>|\\^|&|!|\\| a)+",
+      "name": "constant.language"
+    },
+    "variable": {
+      "match": "(er|xr|qr|r)\\d{1,2}",
+      "name": "keyword.other.unit"
+    },
+
+    "symbols": {
+      "match": "\\b(render.{4}4|sp|rt|(mem|str)cpy|pr_length|mov|smart_\\w*|str(cat|len)|get\\w*|\\w*_draw|.*print|print\\w*|wait.*\\s|num_\\w*|setlr|DI|(BL|bl)\\s\\w*|)\\b",
+      "name": "keyword.other"
     }
   }
 }

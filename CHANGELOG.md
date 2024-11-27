@@ -5,5 +5,6 @@ All notable changes to the "suwako-lang" extension will be documented in this fi
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
-
-- Initial release
+11-27-2024:
+    - Initial release
+    - Added basic keywords
